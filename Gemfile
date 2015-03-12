@@ -1,4 +1,10 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-# Specify your gem's dependencies in you_track.gemspec
 gemspec
+
+gem "awesome_print"
+gem "pry-nav"
+
+group :test do
+  gem "rspec", "~> 3.2"
+end
