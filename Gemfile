@@ -7,4 +7,5 @@ gem "pry-nav"
 
 group :test do
   gem "rspec", "~> 3.2"
+  gem "faker"
 end

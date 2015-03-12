@@ -30,6 +30,7 @@ class YouTrack::Parser::IssueParser
     results.merge!(parse_fields(standard_fields))
     results["custom_fields"] = parse_fields(custom_fields)
     results["attachments"] = parse_attachments(attachments)
+    results["comments"] = results.delete("comment")
 
     results
   end

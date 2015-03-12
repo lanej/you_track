@@ -10,6 +10,8 @@ class YouTrack::Client::Real
     @username, @password = options.values_at(:username, :password)
     @authenticated, @authenticating = false, false
 
+    @authenticate_mutex = Mutex.new
+
     connection_options = options[:connection_options] || {}
 
     @connection = Faraday.new({url: @url}.merge(connection_options)) do |builder|
@@ -38,15 +40,19 @@ class YouTrack::Client::Real
   def request(options={})
     # @note first request gets the cookie
     if !@authenticated && !@authenticating
-      @authenticating = true
 
-      begin
-        login(@username, @password)
-      ensure
-        @authenticating = false
-      end
+      @authenticate_mutex.synchronize {
+        next if @authenticated
+        @authenticating = true
 
-      @authenticated = true
+        begin
+          login(@username, @password)
+        ensure
+          @authenticating = false
+        end
+
+        @authenticated = true
+      }
     end
 
     method  = options[:method] || :get

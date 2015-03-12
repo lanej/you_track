@@ -6,5 +6,9 @@ class YouTrack::Client::GetIssue < YouTrack::Client::Request
     )
   end
 
-  #<?xml version="1.0" encoding="UTF-8" standalone="yes"?><error>Issue not found.</error>
+  def mock(issue_id)
+    service.response(
+      :body => find(:issues, issue_id)
+    )
+  end
 end

@@ -1,22 +1,27 @@
 class YouTrack::Client::Mock
+  attr_reader :url, :username
+
   def self.data
-    @data ||= {
-      :issues => [],
-      :jobs   => {},
+    @data ||= Hash.new { |h,k|
+      h[k] = {
+        :issues => {},
+      }
     }
   end
 
   def self.reset!
-    @data = nil
+    data.clear
   end
 
   def data
-    self.class.data
+    self.class.data[@url]
   end
+
+  attr_accessor :last_request
 
   def url_for(path, options={})
     URI.parse(
-      File.join(service.url, "/rest", path.to_s)
+      File.join(self.url, "/rest", path.to_s)
     ).tap do |uri|
       if query = options[:query]
         uri.query = Faraday::NestedParamsEncoder.encode(query)
@@ -24,11 +29,16 @@ class YouTrack::Client::Mock
     end.to_s
   end
 
+  def initialize(options={})
+    @url = options[:url]
+    @username = options[:username]
+  end
+
   def response(options={})
     body                 = options[:response_body] || options[:body]
     method               = options[:method]        || :get
     params               = options[:params]
-    service.last_request = options[:request_body]
+    self.last_request    = options[:request_body]
     status               = options[:status]        || 200
 
     path = options[:path]
