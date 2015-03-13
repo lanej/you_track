@@ -27,7 +27,7 @@ describe "as a customer" do
 
     let!(:issue) { @issue }
 
-    it "should get an issue" do
+    it "gets an issue" do
       expect(client.issues.get(issue.identity)).to eq(issue)
     end
 
@@ -35,8 +35,32 @@ describe "as a customer" do
       expect(client.issues.all(project)).to include(@issue)
     end
 
-    it "should list no issues" do
+    it "lists no issues to prove that the parser is sane" do
       expect(client.issues.all(project, {"after" => 100})).to be_empty
+    end
+
+    it "updates an issue" do
+      old_summary       = issue.summary
+      old_description   = issue.description
+      new_summary       = Faker::Lorem.sentence(1)
+      new_description   = Faker::Lorem.paragraph(2)
+      issue.summary     = new_summary
+      issue.description = new_description
+
+      issue.save
+
+      expect(issue.reload.summary).to eq(new_summary)
+      expect(issue.reload.description).to eq(new_description)
+    end
+
+    it "changes the issue state" do
+      states = ['Open', 'Deployed']
+
+      new_state = states.detect { |s| s != issue.state }
+
+      expect {
+        issue.state = new_state
+      }.to change { issue.state }.to(new_state)
     end
   end
 end

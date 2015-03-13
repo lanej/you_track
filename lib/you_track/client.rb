@@ -12,6 +12,12 @@ require_relative "client/login"
 require_relative "client/get_issue"
 require_relative "client/get_issues"
 require_relative "client/create_issue"
+require_relative "client/update_issue"
+require_relative "client/apply_issue_command"
+
+require_relative "client/get_issue_comments"
 
 require_relative "client/issue"
 require_relative "client/issues"
+require_relative "client/comment"
+require_relative "client/comments"

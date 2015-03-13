@@ -1,23 +1,4 @@
-class YouTrack::Parser::IssuesParser
-  attr_reader :raw
-
-  def initialize(raw)
-    @raw = raw
-  end
-
-  def parse_fields(fields)
-    fields.inject({}) { |r, f|
-      r.merge(f["name"] => f["value"])
-    }
-  end
-
-  def parse_attachments(attachments)
-    attachments.inject([]) { |r, a|
-      value = a["value"]
-      r << {"id" => value["id"], "url" => value["url"], "content" => value["__content__"]}
-    }
-  end
-
+class YouTrack::Parser::IssuesParser < YouTrack::Parser::IssueParser
   def parse
     return [] if raw["issues"].nil?      # i hate xml
     results = raw["issues"]["issue"].dup # i really hate xml

@@ -32,7 +32,9 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
       "reporterFullName" => service.username.capitalize,
       "commentsCount"    => "0",
       "votes"            => "0",
-      "custom_fields"    => [], # @fixme need these
+      "custom_fields"    => [
+        ["State", "Open"],
+      ], # @fixme need these
       "attachments"      => [],
     )
 
