@@ -1,6 +1,5 @@
 class YouTrack::Client < Cistern::Service
-  requires :url, :username, :password
-  recognizes :logger, :adapter, :builder, :connection_options
+  recognizes :logger, :adapter, :builder, :connection_options, :url, :username, :password
 end
 
 require_relative "client/real"
@@ -11,6 +10,7 @@ require_relative "client/request"
 
 require_relative "client/login"
 require_relative "client/get_issue"
+require_relative "client/get_issues"
 require_relative "client/create_issue"
 
 require_relative "client/issue"
