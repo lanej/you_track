@@ -15,13 +15,15 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
 
     project = issue["projectShortName"] = issue.delete("project")
 
-    identity = service.data[:issues].size + 1
+    index = service.data[:issues].size + 1
+    project_index = service.data[:issues].values.select { |i| i["projectShortName"] == project }.size
 
+    identity = "#{project}-#{index}"
 
     issue.merge!(
-      "id"               => "#{project}-#{identity}",
+      "id"               => identity,
       "tag"              => "",
-      "numberInProject"  => identity,
+      "numberInProject"  => project_index,
       "created"          => Time.now.to_i * 1000,
       "updated"          => Time.now.to_i * 1000,
       "updaterName"      => service.username,
@@ -33,6 +35,8 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
       "custom_fields"    => [], # @fixme need these
       "attachments"      => [],
     )
+
+    service.data[:issues][identity] = issue
 
     service.response(
       :body   => issue,

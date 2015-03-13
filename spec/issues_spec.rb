@@ -18,6 +18,13 @@ describe "as a customer" do
     expect(issue.id).to          match(project)
     expect(issue.summary).to     eq(summary)
     expect(issue.description).to eq(description)
+  end
 
+  context "with an issue" do
+    let!(:issue) { create_issue(client: client) }
+
+    it "should get an issue" do
+      expect(client.issues.get(issue.identity)).to eq(issue)
+    end
   end
 end
