@@ -2,6 +2,10 @@ class YouTrack::Client::Real
   attr_reader :url, :connection, :adapter, :username, :authenticated
 
   def initialize(options={})
+    youtrack_file = YAML.load_file(File.expand_path("~/.youtrack"))
+
+    options.merge!(youtrack_file)
+    requires(options, :url, :username, :password)
     @url           = URI.parse(options[:url])
     adapter        = options[:adapter] || Faraday.default_adapter
     logger         = options[:logger]  || Logger.new(nil)
@@ -37,6 +41,13 @@ class YouTrack::Client::Real
     end
   end
 
+  def requires(options, *required)
+    missing = required.map do |required_param|
+      required_param if options[required_param].nil?
+    end.compact
+    raise RuntimeError, "Missing required options: #{missing.inspect}" unless missing.empty?
+  end
+
   def request(options={})
     # @note first request gets the cookie
     if !@authenticated && !@authenticating
@@ -55,12 +66,14 @@ class YouTrack::Client::Real
       }
     end
 
-    method  = options[:method] || :get
-    url     = URI.parse(options[:url] || File.join(self.url.to_s, "/rest", options.fetch(:path)))
-    params  = options[:params] || {}
-    body    = options[:body]
-    headers = options[:headers] || {}
-    parser  = options[:parser]
+    method    = options[:method] || :get
+    query     = options[:query]
+    url       = URI.parse(options[:url] || File.join(self.url.to_s, "/rest", options.fetch(:path)))
+    url.query = query.map { |k,v| "#{k}=#{v}" }.join('&') if query
+    params    = options[:params] || {}
+    body      = options[:body]
+    headers   = options[:headers] || {}
+    parser    = options[:parser]
 
     headers["Content-Type"] ||= if body.nil?
                                   if !params.empty?

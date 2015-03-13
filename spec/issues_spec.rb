@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "as a customer" do
-  let!(:client) { create_client }
+  let!(:client)  { create_client }
+  let!(:project) { ENV["YOUTRACK_PROJECT"] || "YTD" }
 
-  it "should create an issue" do
-    project     = ENV["YOUTRACK_PROJECT"] || "YTD"
+  it "creates an issue" do
     summary     = Faker::Lorem.sentence(1)
     description = Faker::Lorem.paragraph(2)
 
@@ -21,10 +21,22 @@ describe "as a customer" do
   end
 
   context "with an issue" do
-    let!(:issue) { create_issue(client: client) }
+    before(:each) do
+      @issue = client.issues.get("#{project}-1") || client.issues.create(project: project, summary: Faker::Lorem.sentence(1), description: Faker::Lorem.paragraph(2))
+    end
+
+    let!(:issue) { @issue }
 
     it "should get an issue" do
       expect(client.issues.get(issue.identity)).to eq(issue)
+    end
+
+    it "lists issues" do
+      expect(client.issues.all(project)).to include(@issue)
+    end
+
+    it "should list no issues" do
+      expect(client.issues.all(project, {"after" => 100})).to be_empty
     end
   end
 end
