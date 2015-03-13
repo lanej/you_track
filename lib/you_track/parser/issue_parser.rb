@@ -1,16 +1,4 @@
-class YouTrack::Parser::IssueParser
-  attr_reader :raw
-
-  def initialize(raw)
-    @raw = raw
-  end
-
-  def parse_fields(fields)
-    fields.inject({}) { |r, f|
-      r.merge(f["name"] => f["value"])
-    }
-  end
-
+class YouTrack::Parser::IssueParser < YouTrack::Parser::Base
   def parse_attachments(attachments)
     attachments.inject([]) { |r, a|
       value = a["value"]

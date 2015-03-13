@@ -4,7 +4,8 @@ class YouTrack::Client::Mock
   def self.data
     @data ||= Hash.new { |h,k|
       h[k] = {
-        :issues => {},
+        :issues   => {},
+        :comments => {},
       }
     }
   end

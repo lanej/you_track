@@ -69,7 +69,7 @@ class YouTrack::Client::Real
     method    = options[:method] || :get
     query     = options[:query]
     url       = URI.parse(options[:url] || File.join(self.url.to_s, "/rest", options.fetch(:path)))
-    url.query = query.map { |k,v| "#{k}=#{v}" }.join('&') if query
+    url.query = query.map { |k,v| "#{k}=#{URI.escape(v)}" }.join('&') if query
     params    = options[:params] || {}
     body      = options[:body]
     headers   = options[:headers] || {}

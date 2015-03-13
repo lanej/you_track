@@ -22,6 +22,25 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
 
   # CREATE https://confluence.jetbrains.com/display/YTD6/Create+New+Issue
   # UPDATE https://confluence.jetbrains.com/display/YTD6/Update+an+Issue
+
+  def comments
+    service.comments.load(service.get_issue_comments(self.identity).body)
+  end
+
+  def comment(comment)
+    service.apply_issue_command("id" => self.identity, "comment" => comment)
+    comments.detect { |c| c.text == comment }
+  end
+
+  def state
+    custom_fields.detect { |f| f[0] == 'State' }.last
+  end
+
+  def state=(new_state)
+    service.apply_issue_command("id" => self.identity, "command" => "State #{new_state}")
+    self.reload
+  end
+
   def save
     if new_record?
       requires :project, :summary
@@ -36,7 +55,13 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
         ).body
       )
     else
-      raise NotImplementedError
+      requires :identity
+      service.update_issue(
+        "id"          => self.identity,
+        "summary"     => self.summary,
+        "description" => self.description
+      )
+      self.reload
     end
   end
 end
