@@ -2,10 +2,10 @@ class YouTrack::Client::Real
   attr_reader :url, :connection, :adapter, :username, :authenticated
 
   def initialize(options={})
-    youtrack_file = YAML.load_file(File.expand_path("~/.youtrack"))
+    options.merge!(YouTrack.defaults)
 
-    options.merge!(youtrack_file)
     requires(options, :url, :username, :password)
+
     @url           = URI.parse(options[:url])
     adapter        = options[:adapter] || Faraday.default_adapter
     logger         = options[:logger]  || Logger.new(nil)
