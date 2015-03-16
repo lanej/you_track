@@ -22,7 +22,7 @@ class YouTrack::Client::Mock
 
   def url_for(path, options={})
     URI.parse(
-      File.join(self.url, "/rest", path.to_s)
+      File.join(self.url.to_s, "/rest", path.to_s)
     ).tap do |uri|
       if query = options[:query]
         uri.query = Faraday::NestedParamsEncoder.encode(query)
@@ -31,7 +31,7 @@ class YouTrack::Client::Mock
   end
 
   def initialize(options={})
-    @url = options[:url]
+    @url = URI.parse(options[:url])
     @username = options[:username]
   end
 

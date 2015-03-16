@@ -1,6 +1,7 @@
 require "you_track/version"
 
 require "logger"
+require "uri"
 
 require "cistern"
 require "faraday"
