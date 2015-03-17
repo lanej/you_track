@@ -13,4 +13,11 @@ class YouTrack::Client::Issues < YouTrack::Client::Collection
   rescue Faraday::ResourceNotFound
     nil
   end
+
+  def delete(identity)
+    service.request(
+      :path   => "/issue/#{identity}",
+      :method => :delete,
+    )
+  end
 end
