@@ -4,7 +4,6 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
       :path   => "/issue",
       :method => :put,
       :params => params,
-      :parser => YouTrack::Parser::IssueParser,
     )
   end
 
@@ -41,7 +40,6 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
     service.data[:issues][identity] = issue
 
     service.response(
-      :body   => issue,
       :status => 201,
     )
   end

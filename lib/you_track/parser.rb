@@ -2,6 +2,16 @@ module YouTrack::Parser
 end
 
 require_relative "parser/base"
-require_relative "parser/issue_parser"
-require_relative "parser/issues_parser"
-require_relative "parser/comments_parser"
+
+parsers = %w(
+  comments
+  issue
+  issues
+  projects
+  user
+  project_custom_fields
+)
+
+parsers.each do |parser|
+  require_relative "parser/#{parser}_parser"
+end

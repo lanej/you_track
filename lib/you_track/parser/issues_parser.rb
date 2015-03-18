@@ -2,6 +2,7 @@ class YouTrack::Parser::IssuesParser < YouTrack::Parser::IssueParser
   def parse
     return [] if raw["issues"].nil?      # i hate xml
     results = raw["issues"]["issue"].dup # i really hate xml
+    results = [results] if results.is_a?(Hash)
 
     results.each do |result|
       fields = result.delete("field")

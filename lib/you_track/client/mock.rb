@@ -6,6 +6,22 @@ class YouTrack::Client::Mock
       h[k] = {
         :issues   => {},
         :comments => {},
+        :users    => {},
+        :projects => {
+          "YTD" => {
+            "name"        => "You Track Dev",
+            "shortName"   => "YTD",
+            "versions"    => [],
+            "assignees"   => {},
+            "isImporting" => "false",
+            "description" => "Fake project for YouTrack development",
+          }
+        },
+        :custom_fields => {
+          "YTD" => [
+            {"name" => "Fix versions", "url" => "https://foo.bar/rest/admin/project/YTD/customfield/Fix%20versions"}
+          ]
+        }
       }
     }
   end
@@ -33,6 +49,11 @@ class YouTrack::Client::Mock
   def initialize(options={})
     @url = URI.parse(options[:url])
     @username = options[:username]
+    self.data[:users][@username] = {
+      :email                => @username,
+      :full_name            => Faker::Name.name,
+      :last_created_project => SecureRandom.hex(2),
+    }
   end
 
   def response(options={})
@@ -69,5 +90,9 @@ class YouTrack::Client::Mock
 
     Faraday::Response::RaiseError.new.on_complete(env) ||
       Faraday::Response.new(env)
+  end
+
+  def current_user
+    @current_user ||= users.current
   end
 end
