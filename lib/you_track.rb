@@ -18,6 +18,8 @@ module YouTrack
                     {}
                   end
   end
+
+  class NotAnAdminError < StandardError; end
 end
 
 

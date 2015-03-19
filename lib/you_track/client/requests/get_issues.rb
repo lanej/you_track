@@ -8,7 +8,7 @@ class YouTrack::Client::GetIssues < YouTrack::Client::Request
   end
 
   def mock(project, filters={})
-    issues = service.data[:issues].values
+    issues = service.data[:issues].values.select { |i| i["projectShortName"] == project }
 
     # delete first n elements from the array
     if filters["after"]

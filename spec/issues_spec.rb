@@ -14,7 +14,7 @@ describe "as a customer" do
       :description => description,
     )
 
-    expect(issue.project).to     eq(project)
+    expect(issue.project).to     eq(client.projects.get(project))
     expect(issue.id).to          match(project)
     expect(issue.summary).to     eq(summary)
     expect(issue.description).to eq(description)

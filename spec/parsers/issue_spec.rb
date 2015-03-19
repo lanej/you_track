@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe YouTrack::Parser::IssueParser do
   subject { YouTrack::Parser::IssueParser.new(MultiXml.parse(File.read("spec/fixtures/issue.xml"))) }
 
-  it "should parse issue xml" do
+  it "parses issue xml" do
     expect(
       subject.parse
     ).to eq(

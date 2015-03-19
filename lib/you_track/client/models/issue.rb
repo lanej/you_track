@@ -41,19 +41,23 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
     self.reload
   end
 
+  def project
+    service.projects.get(self.attributes[:project])
+  end
+
   def save
     if new_record?
       requires :project, :summary
 
-      merge_attributes(
-        service.create_issue(
-          "project"         => self.project,
-          "summary"         => self.summary,
-          "description"     => self.description,
-          "attachments"     => self.attachments,
-          "permittedGroups" => self.permitted_group,
-        ).body
+      service.create_issue(
+        "project"         => self.attributes[:project],
+        "summary"         => self.summary,
+        "description"     => self.description,
+        "attachments"     => self.attachments,
+        "permittedGroups" => self.permitted_group,
       )
+
+      merge_attributes(project.issues.detect { |s| s.summary == summary }.attributes) # hacky, but the create request returns nothing
     else
       requires :identity
       service.update_issue(
