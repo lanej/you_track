@@ -2,10 +2,10 @@ class YouTrack::Client::Projects < YouTrack::Client::Collection
   model YouTrack::Client::Project
 
   def all
-    service.projects.load(service.get_projects.body)
+    load(service.get_projects.body)
   end
 
   def get(identity)
-    all.detect { |p| p.id == identity }
+    find { |p| p.identity == identity }
   end
 end

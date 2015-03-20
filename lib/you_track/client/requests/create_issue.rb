@@ -40,6 +40,9 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
     service.data[:issues][identity] = issue
 
     service.response(
+      :response_headers => {
+        "Location" => service.url_for("/issue/#{identity}"),
+      },
       :status => 201,
     )
   end

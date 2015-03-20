@@ -8,4 +8,8 @@ class YouTrack::Client::Model
       end
     }
   end
+
+  def require_admin!
+    raise YouTrack::NotAnAdminError unless service.current_user.admin?
+  end
 end

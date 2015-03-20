@@ -48,7 +48,7 @@ class YouTrack::Client::Real
     raise RuntimeError, "Missing required options: #{missing.inspect}" unless missing.empty?
   end
 
-  def request(options={})
+  def authenticate!
     # @note first request gets the cookie
     if !@authenticated && !@authenticating
 
@@ -65,6 +65,10 @@ class YouTrack::Client::Real
         @authenticated = true
       }
     end
+  end
+
+  def request(options={})
+    authenticate!
 
     method    = options[:method] || :get
     query     = options[:query]

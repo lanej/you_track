@@ -7,20 +7,8 @@ class YouTrack::Client::Mock
         :issues   => {},
         :comments => {},
         :users    => {},
-        :projects => {
-          "YTD" => {
-            "name"        => "You Track Dev",
-            "shortName"   => "YTD",
-            "versions"    => [],
-            "assignees"   => {},
-            "isImporting" => "false",
-            "description" => "Fake project for YouTrack development",
-          }
-        },
+        :projects => {},
         :custom_fields => {
-          "YTD" => [
-            {"name" => "Fix versions", "url" => "https://foo.bar/rest/admin/project/YTD/customfield/Fix%20versions"}
-          ]
         }
       }
     }
@@ -38,7 +26,7 @@ class YouTrack::Client::Mock
 
   def url_for(path, options={})
     URI.parse(
-      File.join(self.url.to_s, "/rest", path.to_s)
+      File.join(self.url.to_s, "/rest", URI.escape(path.to_s))
     ).tap do |uri|
       if query = options[:query]
         uri.query = Faraday::NestedParamsEncoder.encode(query)
@@ -67,7 +55,7 @@ class YouTrack::Client::Mock
     url  = options[:url] || url_for(path, query: params)
 
     request_headers  = {"Accept"       => "application/xml"}
-    response_headers = {"Content-Type" => "application/xml"}
+    response_headers = {"Content-Type" => "application/xml"}.merge(options[:response_headers] || {})
 
     # request phase
     # * :method - :get, :post, ...
