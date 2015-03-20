@@ -53,6 +53,10 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
 
   def save
     if new_record?
+      if collection
+        self.project_id ||= collection.project_id
+      end
+
       requires :summary, :project_id
 
       response = service.create_issue(

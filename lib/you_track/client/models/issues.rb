@@ -1,11 +1,15 @@
 class YouTrack::Client::Issues < YouTrack::Client::Collection
 
+  attribute :project_id
+
   model YouTrack::Client::Issue
 
   def all(project, filters={})
     project_id = (project.respond_to?(:identity) ? project.identity : project)
 
-    load(service.get_issues(project_id, filters).body)
+    response = service.get_issues(project_id, filters)
+    merge_attributes(project_id: project_id)
+    load(response.body)
   end
 
   def get(identity)

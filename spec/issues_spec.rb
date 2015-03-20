@@ -8,8 +8,7 @@ describe "as a customer" do
     summary     = Faker::Lorem.sentence(1)
     description = Faker::Lorem.paragraph(2)
 
-    issue = client.issues.create(
-      :project     => project,
+    issue = project.issues.create(
       :summary     => summary,
       :description => description,
     )
