@@ -7,7 +7,7 @@ module ResourceHelper
   end
 
   def create_issue(client: client, issue: {}, project: nil)
-    issue[:project] ||= ENV["YOUTRACK_PROJECT"] || "YTD"
+    issue[:project] ||= ENV["YOUTRACK_PROJECT"] || create_project(client)
     issue[:summary] ||= Faker::Lorem.sentence(1)
     issue[:description] ||= Faker::Lorem.paragraph(2)
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "as a customer" do
   let!(:client)  { create_client }
-  let!(:project) { ENV["YOUTRACK_PROJECT"] || "YTD" }
+  let!(:project) { create_project(client) }
 
   it "creates an issue" do
     summary     = Faker::Lorem.sentence(1)
@@ -14,8 +14,8 @@ describe "as a customer" do
       :description => description,
     )
 
-    expect(issue.project).to     eq(client.projects.get(project))
-    expect(issue.id).to          match(project)
+    expect(issue.project).to     eq(project)
+    expect(issue.id).to          match(project.identity)
     expect(issue.summary).to     eq(summary)
     expect(issue.description).to eq(description)
   end
@@ -23,7 +23,6 @@ describe "as a customer" do
   context "with an issue" do
 
     let!(:issue) {
-      client.issues.get("#{project}-1") ||
       client.issues.create(project: project, summary: Faker::Lorem.sentence(1), description: Faker::Lorem.paragraph(2))
     }
 
