@@ -4,6 +4,6 @@ describe "as a customer" do
   let!(:client)  { create_client }
 
   it "gets information about the current user" do
-    expect(client.users.current.identity).to eq(client.username)
+    expect(client.users.current.identity).to match(client.username)
   end
 end

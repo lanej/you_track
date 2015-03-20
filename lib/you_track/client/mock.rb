@@ -35,13 +35,22 @@ class YouTrack::Client::Mock
   end
 
   def initialize(options={})
-    @url = URI.parse(options[:url])
+    @url      = URI.parse(options[:url])
     @username = options[:username]
-    self.data[:users][@username] = {
-      :email                => @username,
-      :full_name            => Faker::Name.name,
-      :last_created_project => SecureRandom.hex(2),
+
+    set_current_user
+  end
+
+  def set_current_user
+    self.data[:users][username] ||= {
+      "email"                => "#{username}@example.org",
+      "full_name"            => Faker::Name.name,
+      "last_created_project" => SecureRandom.hex(2),
     }
+  end
+
+  def current_user
+    @current_user ||= users.current
   end
 
   def response(options={})
@@ -78,9 +87,5 @@ class YouTrack::Client::Mock
 
     Faraday::Response::RaiseError.new.on_complete(env) ||
       Faraday::Response.new(env)
-  end
-
-  def current_user
-    @current_user ||= users.current
   end
 end

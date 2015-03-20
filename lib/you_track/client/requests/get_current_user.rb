@@ -8,7 +8,7 @@ class YouTrack::Client::GetCurrentUser < YouTrack::Client::Request
 
   def mock
     service.response(
-      :body => find(:users, service.username)
+      :body => service.set_current_user,
     )
   end
 end
