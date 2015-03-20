@@ -26,7 +26,7 @@ class YouTrack::Client::Mock
 
   def url_for(path, options={})
     URI.parse(
-      File.join(self.url.to_s, "/rest", path.to_s)
+      File.join(self.url.to_s, "/rest", URI.escape(path.to_s))
     ).tap do |uri|
       if query = options[:query]
         uri.query = Faraday::NestedParamsEncoder.encode(query)

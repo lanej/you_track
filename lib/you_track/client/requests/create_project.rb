@@ -33,7 +33,7 @@ class YouTrack::Client::CreateProject < YouTrack::Client::Request
 
     # @hack
     service.data[:custom_fields][identity] = [
-      {"name" => "Fix versions", "url" => "https://foo.bar/rest/admin/project/YTD/customfield/Fix%20versions"}
+      {"name" => "Fix versions", "url" => service.url_for("/admin/project/#{identity}/customfield/Fix versions")}
     ]
 
     service.response(status: 201)
