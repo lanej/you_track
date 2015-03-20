@@ -15,6 +15,10 @@ class YouTrack::Client::GetIssues < YouTrack::Client::Request
       issues.delete_if.with_index { |x,i| i < (filters["after"].to_i - 1) }
     end
 
+    max = filters["max"] || 10
+
+    issues.slice!(max)
+
     service.response(
       :body => issues
     )
