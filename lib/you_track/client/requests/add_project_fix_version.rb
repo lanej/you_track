@@ -11,9 +11,8 @@ class YouTrack::Client::AddProjectFixVersion < YouTrack::Client::Request
 
   def mock(params={})
     project = find(:projects, params.delete("project"))
-    version = params.delete("version")
 
-    project["versions"] << version
+    project["versions"] << params.delete("version")
 
     service.response
   end

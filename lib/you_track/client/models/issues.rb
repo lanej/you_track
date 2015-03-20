@@ -3,7 +3,7 @@ class YouTrack::Client::Issues < YouTrack::Client::Collection
   model YouTrack::Client::Issue
 
   def all(project, filters={})
-    service.issues.load(service.get_issues(project, filters).body)
+    load(service.get_issues(project, filters).body)
   end
 
   def get(identity)

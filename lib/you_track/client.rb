@@ -19,6 +19,7 @@ requests = %w(
   add_project_fix_version
   apply_issue_command
   create_issue
+  create_project
   get_admin_user
   get_current_user
   get_issue

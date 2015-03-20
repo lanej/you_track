@@ -5,9 +5,9 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
   attribute :comment_count, alias: "commentsCount", type: :integer
   attribute :comments, type: :array
   attribute :created_at, alias: "created", parser: ms_time
-  attribute :custom_fields, type: :array
+  attribute :custom_fields, default: [], parser: lambda { |v, _| Hash[v] }
   attribute :description
-  attribute :project, alias: "projectShortName"
+  attribute :project_id, alias: "projectShortName"
   attribute :project_index, alias: "numberInProject", type: :integer
   attribute :reporter, alias: "reporterFullName"
   attribute :reporter_username, alias: "reporterName"
@@ -33,7 +33,7 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
   end
 
   def state
-    custom_fields.detect { |f| f[0] == 'State' }.last
+    custom_fields["State"]
   end
 
   def state=(new_state)
@@ -41,29 +41,40 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
     self.reload
   end
 
+  def project=(project)
+    self.project_id = (project.is_a?(YouTrack::Client::Project) ? project.identity : project)
+  end
+
   def project
-    service.projects.get(self.attributes[:project])
+    requires :project_id
+
+    service.projects.get(self.project_id)
   end
 
   def save
     if new_record?
-      requires :project, :summary
+      requires :summary, :project_id
 
-      service.create_issue(
-        "project"         => self.attributes[:project],
+      response = service.create_issue(
+        "project"         => self.project_id,
         "summary"         => self.summary,
         "description"     => self.description,
         "attachments"     => self.attachments,
         "permittedGroups" => self.permitted_group,
       )
 
-      merge_attributes(project.issues.detect { |s| s.summary == summary }.attributes) # hacky, but the create request returns nothing
+      merge_attributes(
+        :id => File.basename(response.headers["Location"]),
+      )
+
+      reload
     else
       requires :identity
+
       service.update_issue(
         "id"          => self.identity,
         "summary"     => self.summary,
-        "description" => self.description
+        "description" => self.description,
       )
       self.reload
     end

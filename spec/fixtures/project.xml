@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<projects>
+  <project versions="[v1, v2, 68559484-86d8-452d-9534-246a36745922]" name="YTD" shortName="YTD" isImporting="false">
+    <subsystems>
+      <sub value="No subsystem" />
+    </subsystems>
+    <assigneesLogin />
+    <assigneesFullName />
+  </project>
+  <project name="asfd" shortName="ASDFAG" isImporting="false">
+    <subsystems>
+      <sub value="No subsystem" />
+    </subsystems>
+    <assigneesLogin>
+      <sub value="root" />
+      <sub value="guest" />
+      <sub value="jlane" />
+    </assigneesLogin>
+    <assigneesFullName>
+      <sub value="root" />
+      <sub value="guest" />
+      <sub value="Joshua Lane" />
+    </assigneesFullName>
+  </project>
+</projects>
