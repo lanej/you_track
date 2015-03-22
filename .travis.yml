@@ -1,4 +1,24 @@
+---
 language: ruby
-before_install: gem install bundler --conservative -v "~> 1.8"
+before_install: 'gem install bundler --conservative -v "~> 1.8"'
+
 rvm:
   - 2.1.5
+git:
+  depth: 5
+
+cache:
+  bundler: true
+
+notifications:
+  email: false
+  webhooks:
+    on_success: always
+    on_failure: always
+    on_start: true
+
+branches:
+  except:
+    - /^v[\d]+$/
+
+script: bundle exec rake
