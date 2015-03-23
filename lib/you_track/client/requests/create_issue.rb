@@ -44,7 +44,7 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
                   {}
                 end
 
-      if default["resolved"]
+      if default["resolved"] == "true"
         issue["resolved"] = ms_time(Time.now)
       end
 

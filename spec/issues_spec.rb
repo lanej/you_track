@@ -51,13 +51,12 @@ describe "as a customer" do
     end
 
     it "changes the issue state" do
-      states = ['Open', 'Deployed']
-
-      new_state = states.find { |s| s != issue.state }
+      new_state = "Fixed"
 
       expect {
         issue.state = new_state
-      }.to change { issue.state }.to(new_state)
+      }.to change  { issue.state     }.to(new_state).
+        and change { issue.resolved? }.to(true)
     end
   end
 end

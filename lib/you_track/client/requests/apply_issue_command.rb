@@ -31,8 +31,20 @@ class YouTrack::Client::ApplyIssueCommand < YouTrack::Client::Request
 
     if params["command"]
       commands = params["command"].split.each_slice(2).map { |a| [a[0], a[1]] }
-      commands.each do |command|
-        issue["custom_fields"].detect { |f| f[0] == command[0] }[1] = command[1]
+      commands.each do |field, value|
+        prototype = service.data[:custom_fields].fetch(field)
+
+        bundle_value = if bundle = service.data[:bundles][prototype["defaultBundle"]]
+                         bundle["values"].find { |v| v["value"] == value }
+                       else # @fixme explode
+                         {}
+                       end
+
+        if bundle_value["resolved"] == "true"
+          issue["resolved"] = ms_time(Time.now)
+        end
+
+        issue["custom_fields"].find { |name, _| name == field }[1] = value
       end
     end
 

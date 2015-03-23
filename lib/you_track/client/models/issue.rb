@@ -30,6 +30,13 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
     comments.detect { |c| c.text == comment }
   end
 
+  def assignee
+  end
+
+  def resolved?
+    !! self.resolved
+  end
+
   def state
     custom_fields["State"]
   end
