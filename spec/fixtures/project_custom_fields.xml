@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<projectCustomFieldRefs>
+  <projectCustomField name="Priority" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Priority" />
+  <projectCustomField name="Type" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Type" />
+  <projectCustomField name="State" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/State" />
+  <projectCustomField name="Assignee" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Assignee" />
+  <projectCustomField name="Subsystem" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Subsystem" />
+  <projectCustomField name="Fix versions" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Fix%20versions" />
+  <projectCustomField name="Affected versions" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Affected%20versions" />
+  <projectCustomField name="Fixed in build" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Fixed%20in%20build" />
+  <projectCustomField name="Teams" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Teams" />
+  <projectCustomField name="Product" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Product" />
+  <projectCustomField name="Target Distro" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Target%20Distro" />
+  <projectCustomField name="Scope" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Scope" />
+  <projectCustomField name="Cookbook Subsystem" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Cookbook%20Subsystem" />
+  <projectCustomField name="Fixed Distros" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Fixed%20Distros" />
+  <projectCustomField name="Release" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Release" />
+  <projectCustomField name="CC Teams" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/CC%20Teams" />
+  <projectCustomField name="Target Distros" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Target%20Distros" />
+  <projectCustomField name="Rally State" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Rally%20State" />
+  <projectCustomField name="Rally ID" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Rally%20ID" />
+  <projectCustomField name="Post Status" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Post%20Status" />
+  <projectCustomField name="Ticket Type" url="https://tickets.engineyard.com/rest/admin/project/YTD/customfield/Ticket%20Type" />
+</projectCustomFieldRefs>

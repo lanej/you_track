@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stateBundle name="States">
+    <state isResolved="false">Submitted</state>
+    <state isResolved="false">Open</state>
+    <state isResolved="false">In Progress</state>
+    <state isResolved="false">To be discussed</state>
+    <state isResolved="false">Reopened</state>
+    <state isResolved="true">Can't Reproduce</state>
+    <state isResolved="true">Duplicate</state>
+    <state isResolved="true">Fixed</state>
+    <state isResolved="true">Won't fix</state>
+    <state description="Issue description is incomplete" isResolved="true">Incomplete</state>
+    <state isResolved="true">Obsolete</state>
+    <state description="Issue fix is verified" isResolved="true">Verified</state>
+    <state isResolved="false">New</state>
+</stateBundle>

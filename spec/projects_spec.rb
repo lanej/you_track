@@ -39,7 +39,7 @@ describe "as a customer" do
     context "with an admin user" do
 
       it "has custom fields" do
-        expect(project.custom_fields.map { |cf| cf["name"] }).to include("Fix versions")
+        expect(project.custom_fields.map { |cf| cf["name"] }).to include("Fix Versions")
       end
 
       it "adds a version to the project" do

@@ -12,30 +12,43 @@ class YouTrack::Client::CreateIssue < YouTrack::Client::Request
 
     issue = Cistern::Hash.slice(params, "project", "description", "summary")
 
-    project = issue["projectShortName"] = issue.delete("project")
+    project_id = issue["projectShortName"] = issue.delete("project")
+    find(:projects, project_id)
 
     index = service.data[:issues].size + 1
-    project_index = service.data[:issues].values.select { |i| i["projectShortName"] == project }.size
+    project_index = service.data[:issues].values.select { |i| i["projectShortName"] == project_id }.size
 
-    identity = "#{project}-#{index}"
+    identity = "#{project_id}-#{index}"
 
     issue.merge!(
       "id"               => identity,
       "tag"              => "",
       "numberInProject"  => project_index,
-      "created"          => Time.now.to_i * 1000,
-      "updated"          => Time.now.to_i * 1000,
+      "created"          => ms_time(Time.now),
+      "updated"          => ms_time(Time.now),
       "updaterName"      => service.username,
       "updaterFullName"  => service.username.capitalize,
       "reporterName"     => service.username,
       "reporterFullName" => service.username.capitalize,
       "commentsCount"    => "0",
       "votes"            => "0",
-      "custom_fields"    => [
-        ["State", "Open"],
-      ], # @fixme need these
       "attachments"      => [],
+      "custom_fields"    => [],
     )
+
+    service.data[:project_custom_fields][project_id].each { |prototype|
+      default = if bundle = service.data[:bundles][prototype["defaultBundle"]]
+                  bundle["values"][prototype["attachBundlePolicy"].to_i]
+                else
+                  {}
+                end
+
+      if default["resolved"]
+        issue["resolved"] = ms_time(Time.now)
+      end
+
+      issue["custom_fields"] << [ prototype["name"], default["value"] ]
+    }
 
     service.data[:issues][identity] = issue
 

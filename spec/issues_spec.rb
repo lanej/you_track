@@ -17,6 +17,7 @@ describe "as a customer" do
     expect(issue.id).to          match(project.identity)
     expect(issue.summary).to     eq(summary)
     expect(issue.description).to eq(description)
+    expect(issue.state).to       eq("Submitted")
   end
 
   context "with an issue" do

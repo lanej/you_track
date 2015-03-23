@@ -31,10 +31,7 @@ class YouTrack::Client::CreateProject < YouTrack::Client::Request
       "versions"       => [],
     }.merge(Cistern::Hash.slice(params, "description"))
 
-    # @hack
-    service.data[:custom_fields][identity] = [
-      {"name" => "Fix versions", "url" => service.url_for("/admin/project/#{identity}/customfield/Fix versions")}
-    ]
+    service.data[:project_custom_fields][identity] = service.data[:custom_fields].values.select { |v| v["autoAttached"] }
 
     service.response(status: 201)
   end

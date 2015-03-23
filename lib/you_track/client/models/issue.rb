@@ -5,7 +5,7 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
   attribute :comment_count, alias: "commentsCount", type: :integer
   attribute :comments, type: :array
   attribute :created_at, alias: "created", parser: ms_time
-  attribute :custom_fields, default: [], parser: lambda { |v, _| Hash[v] }
+  attribute :custom_fields, default: {}, parser: lambda { |v, _| Hash[v] }
   attribute :description
   attribute :project_id, alias: "projectShortName"
   attribute :project_index, alias: "numberInProject", type: :integer

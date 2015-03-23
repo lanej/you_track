@@ -1,3 +1,4 @@
+# https://confluence.jetbrains.com/display/YTD6/GET+Project+Custom+Fields
 class YouTrack::Client::GetProjectCustomFields < YouTrack::Client::Request
   def real(id)
     service.request(
@@ -7,6 +8,17 @@ class YouTrack::Client::GetProjectCustomFields < YouTrack::Client::Request
   end
 
   def mock(id)
-    service.response(body: find(:custom_fields, id))
+    prototypes = find(:project_custom_fields, id)
+
+    body = prototypes.inject([]) { |r,p|
+      name = p.fetch("name")
+
+      r << {
+        "name" => name,
+        "url"  => service.url_for("/admin/project/#{id}/#{name}"),
+      }
+    }
+
+    service.response(body: body)
   end
 end

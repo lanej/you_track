@@ -4,10 +4,32 @@ class YouTrack::Client::Mock
   def self.data
     @data ||= Hash.new { |h,k|
       h[k] = {
-        :issues   => {},
-        :comments => {},
-        :users    => {},
-        :projects => {},
+        :issues                => {},
+        :comments              => {},
+        :users                 => {},
+        :projects              => {},
+        :project_custom_fields => {},
+        :bundles => {
+          "States" => {
+            "type"   => "state",
+            "name"   => "States",
+            "values" => [
+              {"resolved" => "false", "value" => "Submitted"},
+              {"resolved" => "false", "value" => "Open"},
+              {"resolved" => "false", "value" => "In Progress"},
+              {"resolved" => "false", "value" => "To be discussed"},
+              {"resolved" => "false", "value" => "Reopened"},
+              {"resolved" => "true",  "value" => "Can't Reproduce"},
+              {"resolved" => "true",  "value" => "Duplicate"},
+              {"resolved" => "true",  "value" => "Fixed"},
+              {"resolved" => "true",  "value" => "Won't fix"},
+              {"resolved" => "true",  "value" => "Incomplete"},
+              {"resolved" => "true",  "value" => "Obsolete"},
+              {"resolved" => "true",  "value" => "Verified"},
+              {"resolved" => "false", "value" => "New"}
+            ]
+          }
+        },
         :custom_fields => {
           "Type"              => {
             "name"               => "Type",

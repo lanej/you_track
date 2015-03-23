@@ -7,9 +7,10 @@ parsers = %w(
   comments
   issue
   issues
-  projects
-  user
   project_custom_fields
+  projects
+  state_bundle
+  user
 )
 
 parsers.each do |parser|

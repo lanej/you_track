@@ -18,4 +18,8 @@ class YouTrack::Client::Request
     values = params.values_at(*requirements)
     values.size == 1 ? values.first : values
   end
+
+  def ms_time(time)
+    time.to_i * 1000
+  end
 end
