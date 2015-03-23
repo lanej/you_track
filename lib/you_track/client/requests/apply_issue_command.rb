@@ -29,8 +29,24 @@ class YouTrack::Client::ApplyIssueCommand < YouTrack::Client::Request
       }
     end
 
-    if params["command"]
-      commands = params["command"].split.each_slice(2).map { |a| [a[0], a[1]] }
+    if command = params["command"]
+      words = command.scan(/[^\s]+/) # ["State", "In", "Progress", "Assignee", "jlane"]
+      acceptable_commands = find(:project_custom_fields, issue["projectShortName"]).map { |cf| cf["name"] }
+
+      command_map = Hash.new { |h,k| h[k] = [] }
+
+      current_command = words.shift
+      words.each do |word|
+        unless acceptable_commands.include?(word)
+          command_map[current_command] << word
+        else
+          # @todo validate command on closer
+          current_command = word
+        end
+      end
+
+      commands = command_map.inject({}) { |r,(k,v)| r.merge(k => v.join(" ")) }
+
       commands.each do |field, value|
         prototype = service.data[:custom_fields].fetch(field)
 

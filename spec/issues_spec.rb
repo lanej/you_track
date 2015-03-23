@@ -59,6 +59,12 @@ describe "as a customer" do
     end
 
     it "changes the issue state" do
+      new_state = "In Progress"
+
+      expect {
+        issue.state = new_state
+      }.to change { issue.state }.to(new_state)
+
       new_state = "Fixed"
 
       expect {
