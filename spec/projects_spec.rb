@@ -28,7 +28,7 @@ describe "as a customer" do
 
     context "with an issue" do
       let!(:issue) {
-        client.issues.get("#{project}-1") || client.issues.create(project: project, summary: Faker::Lorem.sentence(1), description: Faker::Lorem.paragraph(2))
+        client.issues.create(project: project, summary: Faker::Lorem.sentence(1), description: Faker::Lorem.paragraph(2))
       }
 
       it "lists issues on the project" do

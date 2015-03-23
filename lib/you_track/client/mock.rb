@@ -43,7 +43,8 @@ class YouTrack::Client::Mock
 
   def set_current_user
     self.data[:users][username] ||= {
-      "email"                => "#{username}@example.org",
+      "email"                => Faker::Internet.safe_email(username),
+      "login"                => username,
       "full_name"            => Faker::Name.name,
       "last_created_project" => SecureRandom.hex(2),
     }

@@ -7,6 +7,7 @@ require_relative "client/mock"
 require_relative "client/model"
 require_relative "client/request"
 require_relative "client/login"
+require_relative "client/parameter_request"
 
 models = %w(
   comment
@@ -20,6 +21,7 @@ requests = %w(
   apply_issue_command
   create_issue
   create_project
+  create_user
   get_admin_user
   get_current_user
   get_issue
@@ -27,6 +29,7 @@ requests = %w(
   get_issues
   get_project_custom_fields
   get_projects
+  get_user
   remove_project_fix_version
   update_issue
 )
