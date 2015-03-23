@@ -1,15 +1,15 @@
+# https://confluence.jetbrains.com/display/YTD6/Update+an+Issue
 class YouTrack::Client::UpdateIssue < YouTrack::Client::Request
   def real(params={})
-    id = params.delete("id")
     service.request(
-      :path   => "/issue/#{id}",
+      :path   => "/issue/#{params.fetch("id")}",
       :method => :post,
       :query  => params,
     )
   end
 
   def mock(params={})
-    id    = params.delete("id")
+    id    = params.fetch("id")
     issue = find(:issues, id)
 
     issue.merge!(params)

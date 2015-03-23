@@ -11,6 +11,7 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
   attribute :project_index, alias: "numberInProject", type: :integer
   attribute :reporter, alias: "reporterFullName"
   attribute :reporter_username, alias: "reporterName"
+  attribute :resolved, parser: ms_time
   attribute :summary
   attribute :tags, alias: "tag", type: :array
   attribute :updated_at, alias: "updated", parser: ms_time
@@ -19,9 +20,6 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
   attribute :votes, type: :integer
 
   attr_accessor :permitted_group
-
-  # CREATE https://confluence.jetbrains.com/display/YTD6/Create+New+Issue
-  # UPDATE https://confluence.jetbrains.com/display/YTD6/Update+an+Issue
 
   def comments
     service.comments.load(service.get_issue_comments(self.identity).body)

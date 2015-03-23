@@ -1,3 +1,4 @@
+# https://confluence.jetbrains.com/display/YTD6/Create+New+Issue
 class YouTrack::Client::CreateIssue < YouTrack::Client::Request
   def real(params)
     service.request(
