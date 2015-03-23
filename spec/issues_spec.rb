@@ -50,6 +50,14 @@ describe "as a customer" do
       expect(issue.reload.description).to eq(new_description)
     end
 
+    it "should assign an issue" do
+      assignee = create_user(client)
+
+      expect {
+        issue.assignee = assignee
+      }.to change { issue.assignee }.to(assignee)
+    end
+
     it "changes the issue state" do
       new_state = "Fixed"
 

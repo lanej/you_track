@@ -30,7 +30,18 @@ class YouTrack::Client::Issue < YouTrack::Client::Model
     comments.detect { |c| c.text == comment }
   end
 
+  def assignee=(user)
+    user_id = user.is_a?(YouTrack::Client::User) ? user.identity : user
+    service.apply_issue_command("id" => self.identity, "command" => "Assignee #{user_id}")
+    self.reload
+  end
+
   def assignee
+    if user_id = self.custom_fields["Assignee"]
+      service.users.new(
+        service.get_user(user_id).body
+      )
+    end
   end
 
   def resolved?

@@ -13,6 +13,15 @@ module ResourceHelper
 
     client.issues.create(issue)
   end
+
+  def create_user(client, user: {})
+    name =
+      user[:name]   ||= Faker::Name.name
+    user[:username] ||= Faker::Internet.user_name(name)
+    user[:email]    ||= Faker::Internet.safe_email(name)
+
+    client.users.create(user)
+  end
 end
 
 RSpec.configure do |config|
