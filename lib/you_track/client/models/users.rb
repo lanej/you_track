@@ -7,5 +7,7 @@ class YouTrack::Client::Users < YouTrack::Client::Collection
 
   def get(username)
     service.users.new(service.get_user(username).body)
+  rescue Faraday::ResourceNotFound
+    nil
   end
 end
