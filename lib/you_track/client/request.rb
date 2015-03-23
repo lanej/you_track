@@ -19,7 +19,7 @@ class YouTrack::Client::Request
     values.size == 1 ? values.first : values
   end
 
-  def ms_time(time)
+  def ms_time(time=Time.now)
     time.to_i * 1000
   end
 end

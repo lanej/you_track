@@ -1,30 +1,32 @@
 class YouTrack::Client::ApplyIssueCommand < YouTrack::Client::Request
-  def real(params={})
-    id = params.delete("id")
+  include YouTrack::Client::ParameterRequest
 
+  def identity
+    params.fetch("id")
+  end
+
+  def real
     service.request(
-      :path   => "/issue/#{id}/execute",
+      :path   => "/issue/#{identity}/execute",
       :query  => params,
       :method => :post,
     )
   end
 
-  def mock(params={})
-    id         = params.delete("id")
-    issue      = find(:issues, id)
+  def mock
+    issue      = find(:issues, identity)
     comment_id = "#{Cistern::Mock.random_numbers(2)}-#{Cistern::Mock.random_numbers(5)}"
 
-    if params["comment"]
-      comment = {
+    if comment = params["comment"]
+      service.data[:comments][comment_id] = {
         "id"             => comment_id,
         "author"         => service.username,
         "deleted"        => false,
-        "text"           => params["comment"],
+        "text"           => comment,
         "shownForIssuer" => false,
-        "created"        => Time.now.to_i * 1000,
-        "issueId"        => id,
+        "created"        => ms_time,
+        "issueId"        => identity,
       }
-      service.data[:comments][comment_id] = comment
     end
 
     if params["command"]
