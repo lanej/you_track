@@ -1,79 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <issue id="YTD-1">
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="projectShortName">
-      <value>YTD</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="numberInProject">
-      <value>1</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="summary">
-      <value>test</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="description">
-      <value>test</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="created">
-      <value>1426195066605</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="updated">
-      <value>1426195142776</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="updaterName">
-      <value>jlane</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="updaterFullName">
-      <value>Josh Lane</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="reporterName">
-      <value>jlane</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="reporterFullName">
-      <value>Josh Lane</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="commentsCount">
-      <value>2</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="votes">
-      <value>0</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Priority">
-      <value>Medium</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Type">
-      <value>Bug</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="State">
-      <value>Open</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Subsystem">
-      <value>Unknown subsystem</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Scope">
-      <value>Bug</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Cookbook Subsystem">
-      <value>Unknown subsystem</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Rally State">
-      <value>None Needed</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Post Status">
-      <value>Open</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Ticket Type">
-      <value>Bug</value>
-   </field>
-   <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AttachmentField" name="attachments">
-      <value id="54-2936" url="https://tickets.engineyard.com/_persistent/1146171_714578067952_220952252_o.jpg?file=54-2936&amp;v=0&amp;c=true">1146171_714578067952_220952252_o.jpg</value>
-   </field>
-   <comment id="43-66363" author="jlane" authorFullName="Josh Lane" issueId="YTD-1" deleted="false" text="created comment" shownForIssueAuthor="false" created="1426195073153">
-      <replies />
-   </comment>
-   <comment id="43-66364" author="jlane" authorFullName="Josh Lane" issueId="YTD-1" deleted="true" text="deleted comment" shownForIssueAuthor="false" created="1426195076703" updated="1426195080411">
-      <replies />
-   </comment>
-   <comment id="43-66365" author="jlane" authorFullName="Josh Lane" issueId="YTD-1" deleted="false" text="comment with an attachment" shownForIssueAuthor="false" created="1426195142768">
-      <replies />
-   </comment>
-   <tag>awsm</tag>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="projectShortName">
+    <value>YTD</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="numberInProject">
+    <value>1</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="summary">
+    <value>test</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="description">
+    <value>test</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="created">
+    <value>1426195066605</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="updated">
+    <value>1426195142776</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="updaterName">
+    <value>jlane</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="updaterFullName">
+    <value>Josh Lane</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="reporterName">
+    <value>jlane</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="reporterFullName">
+    <value>Josh Lane</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="commentsCount">
+    <value>2</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SingleField" name="votes">
+    <value>0</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Priority">
+    <value>Medium</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Type">
+    <value>Bug</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="State">
+    <value>Open</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Subsystem">
+    <value>Unknown subsystem</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Scope">
+    <value>Bug</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Cookbook Subsystem">
+    <value>Unknown subsystem</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Rally State">
+    <value>None Needed</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Post Status">
+    <value>Open</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomField" name="Ticket Type">
+    <value>Bug</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="MultiUserField" name="Assignee">
+    <value fullName="Josh Lane">lanej</value>
+  </field>
+  <field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="AttachmentField" name="attachments">
+    <value id="54-2936" url="https://tickets.engineyard.com/_persistent/1146171_714578067952_220952252_o.jpg?file=54-2936&amp;v=0&amp;c=true">1146171_714578067952_220952252_o.jpg</value>
+  </field>
+  <comment id="43-66363" author="jlane" authorFullName="Josh Lane" issueId="YTD-1" deleted="false" text="created comment" shownForIssueAuthor="false" created="1426195073153">
+    <replies />
+  </comment>
+  <comment id="43-66364" author="jlane" authorFullName="Josh Lane" issueId="YTD-1" deleted="true" text="deleted comment" shownForIssueAuthor="false" created="1426195076703" updated="1426195080411">
+    <replies />
+  </comment>
+  <comment id="43-66365" author="jlane" authorFullName="Josh Lane" issueId="YTD-1" deleted="false" text="comment with an attachment" shownForIssueAuthor="false" created="1426195142768">
+    <replies />
+  </comment>
+  <tag>awsm</tag>
 </issue>

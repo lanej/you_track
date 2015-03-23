@@ -6,6 +6,15 @@ class YouTrack::Parser::IssueParser < YouTrack::Parser::Base
     }
   end
 
+  def parse_user_fields(user_fields)
+    user_fields.inject({}) { |r, a|
+      outer_value = a["value"]
+      value = outer_value.delete("__content__")
+
+      r.merge(a["name"] => {"value" => value}.merge(outer_value))
+    }
+  end
+
   def parse
     results = raw["issue"].dup
 
@@ -16,9 +25,14 @@ class YouTrack::Parser::IssueParser < YouTrack::Parser::Base
     custom_fields = fields - attachments
 
     results.merge!(parse_fields(standard_fields))
-    results["custom_fields"] = parse_fields(custom_fields)
-    results["attachments"] = parse_attachments(attachments)
-    results["comments"] = results.delete("comment")
+
+    user_fields = custom_fields.select { |k| k["xsi:type"] == "MultiUserField" }
+
+    custom_fields -= user_fields
+
+    results["custom_fields"] = parse_fields(custom_fields).merge(parse_user_fields(user_fields))
+    results["attachments"]   = parse_attachments(attachments)
+    results["comments"]      = results.delete("comment")
 
     results
   end

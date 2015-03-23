@@ -59,6 +59,7 @@ RSpec.describe YouTrack::Parser::IssueParser do
         "commentsCount"=>"2",
         "votes"=>"0",
         "custom_fields" => {
+          "Assignee" => {"value" => "lanej", "fullName" => "Josh Lane" },
           "Priority"=>"Medium",
           "Type"=>"Bug",
           "State"=>"Open",
